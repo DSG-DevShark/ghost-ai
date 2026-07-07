@@ -42,6 +42,8 @@ next-env.d.ts
 
 
 # extra
-# /context
-ghost-ai.code-workspace
+/context
 /.claude
+AGENTS.md
+CLAUDE.md
+ghost-ai.code-workspace
