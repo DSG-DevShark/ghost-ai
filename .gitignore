@@ -43,6 +43,7 @@ next-env.d.ts
 
 # extra
 /context
+/.agents
 /.claude
 AGENTS.md
 CLAUDE.md

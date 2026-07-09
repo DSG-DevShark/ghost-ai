@@ -21,6 +21,25 @@ const localization = {
     formFieldInputPlaceholder__emailAddress: "Ingresa tu correo",
     formFieldInputPlaceholder__password: "Tu contraseña",
     formFieldInputPlaceholder__signUpPassword: "Crea una contraseña",
+    formFieldLabel__confirmPassword: "Confirma la contraseña",
+    signIn: {
+        ...esES.signIn,
+        start: {
+            ...(esES.signIn as any)?.start,
+            actionLink: "Crear una",
+        },
+    },
+    userProfile: {
+        ...esES.userProfile,
+        emailAddressPage: {
+            ...(esES.userProfile as any)?.emailAddressPage,
+            formHint: "Necesitarás verificar esta dirección de correo antes de que pueda añadirse a tu cuenta.",
+        },
+        passwordPage: {
+            ...(esES.userProfile as any)?.passwordPage,
+            checkboxInfoText__signOutOfOtherSessions: "Se recomienda cerrar sesión en todos los demás dispositivos que puedan haber usado la contraseña anterior.",
+        },
+    },
 }
 
 export const metadata: Metadata = {
