@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { toSlug } from "@/lib/mock-data"
-import type { DialogState } from "@/hooks/use-project-dialogs"
+import type { DialogState } from "@/hooks/use-project-actions"
 
 interface ProjectDialogsProps {
     dialogState: DialogState
     name: string
+    roomIdPreview: string
     isLoading: boolean
     onClose: () => void
     onNameChange: (name: string) => void
@@ -27,6 +27,7 @@ interface ProjectDialogsProps {
 export function ProjectDialogs({
     dialogState,
     name,
+    roomIdPreview,
     isLoading,
     onClose,
     onNameChange,
@@ -34,8 +35,6 @@ export function ProjectDialogs({
     onRename,
     onDelete,
 }: ProjectDialogsProps) {
-    const slug = toSlug(name)
-
     return (
         <>
             <Dialog
@@ -54,11 +53,14 @@ export function ProjectDialogs({
                             placeholder="Nombre del proyecto"
                             value={name}
                             onChange={(e) => onNameChange(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" && roomIdPreview && !isLoading) onCreate()
+                            }}
                             autoFocus
                         />
-                        {name && (
+                        {roomIdPreview && (
                             <p className="text-xs text-copy-muted font-mono px-1">
-                                {slug}
+                                {roomIdPreview}
                             </p>
                         )}
                     </div>
@@ -68,7 +70,7 @@ export function ProjectDialogs({
                         </Button>
                         <Button
                             onClick={onCreate}
-                            disabled={!slug || isLoading}
+                            disabled={!roomIdPreview || isLoading}
                         >
                             {isLoading ? "Creando..." : "Crear proyecto"}
                         </Button>
@@ -95,7 +97,7 @@ export function ProjectDialogs({
                         value={name}
                         onChange={(e) => onNameChange(e.target.value)}
                         onKeyDown={(e) => {
-                            if (e.key === "Enter" && slug && !isLoading) onRename()
+                            if (e.key === "Enter" && name.trim() && !isLoading) onRename()
                         }}
                         autoFocus
                     />
@@ -105,7 +107,7 @@ export function ProjectDialogs({
                         </Button>
                         <Button
                             onClick={onRename}
-                            disabled={!slug || isLoading}
+                            disabled={!name.trim() || isLoading}
                         >
                             {isLoading ? "Guardando..." : "Guardar"}
                         </Button>

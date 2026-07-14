@@ -3,12 +3,13 @@
 import { X, Plus, Pencil, Trash2 } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import type { Project } from "@/lib/mock-data"
+import type { Project } from "@/app/generated/prisma/client"
 
 interface ProjectSidebarProps {
     isOpen: boolean
     onClose: () => void
-    projects: Project[]
+    ownedProjects: Project[]
+    sharedProjects: Project[]
     onCreateProject: () => void
     onRenameProject: (project: Project) => void
     onDeleteProject: (project: Project) => void
@@ -17,14 +18,12 @@ interface ProjectSidebarProps {
 export function ProjectSidebar({
     isOpen,
     onClose,
-    projects,
+    ownedProjects,
+    sharedProjects,
     onCreateProject,
     onRenameProject,
     onDeleteProject,
 }: ProjectSidebarProps) {
-    const ownedProjects = projects.filter((p) => p.isOwned)
-    const sharedProjects = projects.filter((p) => !p.isOwned)
-
     return (
         <>
             {isOpen && (
