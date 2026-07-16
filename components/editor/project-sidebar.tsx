@@ -10,6 +10,7 @@ interface ProjectSidebarProps {
     onClose: () => void
     ownedProjects: Project[]
     sharedProjects: Project[]
+    activeProjectId?: string
     onCreateProject: () => void
     onRenameProject: (project: Project) => void
     onDeleteProject: (project: Project) => void
@@ -20,6 +21,7 @@ export function ProjectSidebar({
     onClose,
     ownedProjects,
     sharedProjects,
+    activeProjectId,
     onCreateProject,
     onRenameProject,
     onDeleteProject,
@@ -73,6 +75,7 @@ export function ProjectSidebar({
                                     <ProjectItem
                                         key={project.id}
                                         project={project}
+                                        isActive={project.id === activeProjectId}
                                         onRename={onRenameProject}
                                         onDelete={onDeleteProject}
                                     />
@@ -91,7 +94,11 @@ export function ProjectSidebar({
                         ) : (
                             <ul className="flex flex-col gap-0.5 overflow-y-auto">
                                 {sharedProjects.map((project) => (
-                                    <ProjectItem key={project.id} project={project} />
+                                    <ProjectItem
+                                        key={project.id}
+                                        project={project}
+                                        isActive={project.id === activeProjectId}
+                                    />
                                 ))}
                             </ul>
                         )}
@@ -111,13 +118,16 @@ export function ProjectSidebar({
 
 interface ProjectItemProps {
     project: Project
+    isActive?: boolean
     onRename?: (project: Project) => void
     onDelete?: (project: Project) => void
 }
 
-function ProjectItem({ project, onRename, onDelete }: ProjectItemProps) {
+function ProjectItem({ project, isActive, onRename, onDelete }: ProjectItemProps) {
     return (
-        <li className="group flex items-center gap-1 px-2 py-2 rounded-xl hover:bg-elevated transition-colors cursor-pointer">
+        <li className={`group flex items-center gap-1 px-2 py-2 rounded-xl transition-colors cursor-pointer ${
+            isActive ? "bg-elevated" : "hover:bg-elevated"
+        }`}>
             <span className="flex-1 text-sm text-copy-primary truncate">{project.name}</span>
             {(onRename || onDelete) && (
                 <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">

@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 import { dark } from "@clerk/ui/themes"
 import { ui } from "@clerk/ui"
-import { esES } from "@clerk/localizations"
+import { esMX } from "@clerk/localizations"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -17,26 +17,71 @@ const geistMono = Geist_Mono({
 })
 
 const localization = {
-    ...esES,
+    ...esMX,
     formFieldInputPlaceholder__emailAddress: "Ingresa tu correo",
     formFieldInputPlaceholder__password: "Tu contraseña",
     formFieldInputPlaceholder__signUpPassword: "Crea una contraseña",
     formFieldLabel__confirmPassword: "Confirma la contraseña",
+    unstable__errors: {
+        ...esMX.unstable__errors,
+        zxcvbn: {
+            ...(esMX.unstable__errors as any)?.zxcvbn,
+            couldBeStronger: "Tu contraseña funciona, pero podría ser más segura. Intenta añadir más caracteres.",
+            goodPassword: "Tu contraseña cumple todos los requisitos necesarios.",
+            notEnough: "Tu contraseña no es suficientemente segura.",
+            suggestions: {
+                ...(esMX.unstable__errors as any)?.zxcvbn?.suggestions,
+                allUppercase: "Usa mayúsculas en algunas letras, no en todas.",
+                anotherWord: "Añade más palabras que sean menos comunes.",
+                associatedYears: "Evita años que estén asociados contigo.",
+                capitalization: "Usa mayúsculas en más letras, no solo en la primera.",
+                dates: "Evita fechas asociadas contigo.",
+                l33t: "Evita sustituciones predecibles como '@' por 'a'.",
+                longerKeyboardPattern: "Usa patrones de teclado más largos y cambia la dirección varias veces.",
+                noNeed: "Puedes crear contraseñas seguras sin usar símbolos, números ni mayúsculas.",
+                pwned: "Si usas esta contraseña en otros sitios, deberías cambiarla.",
+                recentYears: "Evita años recientes.",
+                repeated: "Evita palabras y caracteres repetidos.",
+                reverseWords: "Evita palabras comunes escritas al revés.",
+                sequences: "Evita secuencias de caracteres comunes.",
+                useWords: "Usa varias palabras, pero evita frases comunes.",
+            },
+            warnings: {
+                ...(esMX.unstable__errors as any)?.zxcvbn?.warnings,
+                common: "Esta es una contraseña de uso muy común.",
+                commonNames: "Los nombres y apellidos comunes son fáciles de adivinar.",
+                dates: "Las fechas son fáciles de adivinar.",
+                extendedRepeat: "Los patrones de caracteres repetidos son fáciles de adivinar.",
+                keyPattern: "Los patrones de teclado cortos son fáciles de adivinar.",
+                namesByThemselves: "Los nombres solos son fáciles de adivinar.",
+                pwned: "Esta contraseña ha sido expuesta en filtraciones de datos.",
+                recentYears: "Los años recientes son fáciles de adivinar.",
+                sequences: "Las secuencias comunes son fáciles de adivinar.",
+                similarToCommon: "Esta contraseña es muy similar a una contraseña común.",
+                simpleRepeat: "Los caracteres repetidos como 'aaa' son fáciles de adivinar.",
+                straightRow: "Las filas de teclado cortas son fáciles de adivinar.",
+                topHundred: "Esta es una contraseña muy usada.",
+                topTen: "Esta es una de las contraseñas más usadas.",
+                userInputs: "No debe haber datos personales o relacionados con la página.",
+                wordByItself: "Las palabras solas son fáciles de adivinar.",
+            },
+        },
+    },
     signIn: {
-        ...esES.signIn,
+        ...esMX.signIn,
         start: {
-            ...(esES.signIn as any)?.start,
+            ...(esMX.signIn as any)?.start,
             actionLink: "Crear una",
         },
     },
     userProfile: {
-        ...esES.userProfile,
+        ...esMX.userProfile,
         emailAddressPage: {
-            ...(esES.userProfile as any)?.emailAddressPage,
+            ...(esMX.userProfile as any)?.emailAddressPage,
             formHint: "Necesitarás verificar esta dirección de correo antes de que pueda añadirse a tu cuenta.",
         },
         passwordPage: {
-            ...(esES.userProfile as any)?.passwordPage,
+            ...(esMX.userProfile as any)?.passwordPage,
             checkboxInfoText__signOutOfOtherSessions: "Se recomienda cerrar sesión en todos los demás dispositivos que puedan haber usado la contraseña anterior.",
         },
     },
