@@ -6,6 +6,8 @@ import { WorkspaceNavbar } from "@/components/editor/workspace-navbar"
 import { ProjectSidebar } from "@/components/editor/project-sidebar"
 import { ProjectDialogs } from "@/components/editor/project-dialogs"
 import { ShareDialog } from "@/components/editor/share-dialog"
+import { CanvasWrapper } from "@/components/editor/canvas-wrapper"
+import { ShapePanel } from "@/components/editor/shape-panel"
 import { useProjectActions } from "@/hooks/use-project-actions"
 import type { Project } from "@/app/generated/prisma/client"
 
@@ -44,11 +46,13 @@ export function WorkspaceShell({ project, ownedProjects, sharedProjects, isOwner
                 onDeleteProject={actions.openDelete}
             />
 
-            <main className="pt-14 h-full flex items-center justify-center">
-                <p className="text-sm text-copy-faint">
-                    El canvas de diseño aparecerá aquí.
-                </p>
+            <main className={`pt-14 h-full transition-[margin] duration-300 ease-in-out ${isAiSidebarOpen ? "mr-80" : "mr-0"}`}>
+                <CanvasWrapper roomId={project.id} />
             </main>
+
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30">
+                <ShapePanel />
+            </div>
 
             <aside
                 className={`fixed top-14 right-0 z-40 flex h-[calc(100vh-3.5rem)] w-80 flex-col bg-surface border-l border-surface-border transition-transform duration-300 ease-in-out ${
