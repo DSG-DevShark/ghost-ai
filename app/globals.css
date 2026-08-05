@@ -94,3 +94,7 @@ body {
 [data-clerk-dev-mode-overlay] {
     display: none !important;
 }
+
+#liveblocks-badge {
+    display: none !important;
+}
